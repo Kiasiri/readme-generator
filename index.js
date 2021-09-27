@@ -19,13 +19,13 @@ const promptUser = () => {
     },
     {
       type: "input",
-      name: "instal",
+      name: "install",
       message: "What are the installation instructions?",
     },
     {
       type: "input",
-      name: "instal",
-      message: "What are the installation instructions?",
+      name: "usage",
+      message: "How do you use the application?",
     },
     {
       type: "input",
@@ -40,36 +40,50 @@ const promptUser = () => {
   ]);
 };
 
-const generateReadME = (title, instal, github, description, email) => {
-  const template = `# ${title}
+const generateReadME = ({
+  title,
+  install,
+  github,
+  description,
+  email,
+  credit,
+  usage,
+  license,
+}) =>
+  `# ${title}
 ## Description
 ${description}
 ## Table of Contents 
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
-- [Question](#questions)
+- [Questions](#questions)
 ##Installation
-${instal}
+${install}
 ## Usage
-
+${usage}
 ## Credits
-My collaboraters were .
+${credit}.
 ## License
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+${license}
 ##Contributing
-
+${contribute}
 ##Tests
-
+${tests}
 ##Questions
---Github: https://github.com/${github}
+You can contact me at.
+--[Github](https://github.com/${github})
 --Email: ${email}
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
 ## Badges
-![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.`;
-  fs.writeFile("README.md", template, (err) =>
-    err ? console.error(err) : console.log("Success!")
-  );
+
+
+`;
+const begin = () => {
+  promptUser()
+    // Use writeFileSync method to use promises instead of a callback function
+    .then((answers) => fs.writeFileSync("README.md", generateReadME(answers)))
+    .then(() => console.log("Successfully wrote to README"))
+    .catch((err) => console.error(err));
 };
+begin();
