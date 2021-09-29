@@ -57,46 +57,50 @@ const generateReadME = ({
   github,
   description,
   email,
-  credit,
   usage,
   license,
   contribute,
   tests,
 }) =>
   `# ${title}
-## Description
+
+  [![License: ${license}](https://img.shields.io/badge/License-${license}-yellow.svg)](https://opensource.org/licenses/${license})
+
+  ## Description
 ${description}
 ## Table of Contents 
 - [Usage](#usage)
-- [Credits](#credits)
+- [Installation](#installation)
+- [Contributing](#ccontributing)
+- [Tests](#tests)
 - [License](#license)
 - [Questions](#questions)
-##Installation
+
+## Installation
+
 ${install}
 ## Usage
 ${usage}
-## Credits
-${credit}.
 ## License
-[![License: ${license}](https://img.shields.io/badge/License-${license}-yellow.svg)](https://opensource.org/licenses/${license})
-##Contributing
+This project is covered under the ${license} license.
+  ## Contributing
+  
 ${contribute}
-##Tests
+## Tests
+  
 ${tests}
-##Questions
+
+## Questions
 You can contact me at:
 --[Github](https://github.com/${github})
 --Email: ${email}
-
-## Badges
-
 
 `;
 const begin = () => {
   promptUser()
     // Use writeFileSync method to use promises instead of a callback function
-    .then((answers) => fs.writeFileSync("READ.md", generateReadME(answers)))
-    .then(() => console.log("Successfully wrote to README"))
+    .then((answers) => fs.writeFileSync("sample.md", generateReadME(answers)))
+    .then(() => console.log("Successfully wrote to sample READEME."))
     .catch((err) => console.error(err));
 };
 begin();
